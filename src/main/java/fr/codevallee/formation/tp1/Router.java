@@ -14,12 +14,18 @@ import spark.template.freemarker.FreeMarkerEngine;
 public class Router implements SparkApplication {
 
 	public void init() {
-
+		
+		//routage spark
 		get("/exemple1", (request, response) -> {
 			Map<String, Object> attributes = new HashMap<>();
-			return new ModelAndView(attributes, "home.ftl");
+			attributes.put("nom","van");
+			Connect conn = new Connect();
+			conn.getConnexion();
+			attributes.put("listAgences",conn.getListAgences());
+			attributes.put("monAgence",conn.getAgence());
+			return new ModelAndView(attributes, "home.ftl");			
 		}, getFreeMarkerEngine());
-
+				
 	}
 
 
